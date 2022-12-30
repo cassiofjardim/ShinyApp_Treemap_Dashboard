@@ -1,0 +1,563 @@
+library(shiny)
+library(imola)
+library(shinyWidgets)
+library(highcharter)
+library(stringr)
+library(shinyjs)
+
+
+
+# https://stackoverflow.com/questions/66228047/click-event-in-highcharter-treemap-r-shiny
+
+ui <- fluidPage(
+  useShinyjs(),
+
+  title = 'TREEMAP - Population',
+  div(
+    class = 'select_input_div',
+    h1(class = 'dash_title',
+       'TREEMAP - Dashboard')
+  ),
+  includeCSS(path = 'www/css/style_pintrest.css'),
+  # tabPanel(
+  #   title = "Treemap Panel",
+  #   id = 'main_div',
+
+    # - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - -
+    div(class  ='treemap_box_1box_2',
+
+        div(
+          class = 'treemap',
+
+          # h1(
+          #   "TREEMAP PLAYERS: Total Distance Team's Players",
+          #   tags$img(
+          #     src = 'img/exclamation.png',
+          #     width = '18px',
+          #     height = '18px'
+          #   )
+          # ),
+          selectInput(
+            inputId = 'custom_select',
+            width = '200px',
+            label = 'Clubs',
+            choices = unique(gapminder::gapminder$continent)
+          ),
+
+
+          highchartOutput(outputId = 'hcontainer'),
+
+
+
+          div(class = 'forecasting_chart',
+              style = '',
+              # h5('Population Trend and Forecasting'),
+              p('Modeling Time-Series Forecasting:'),
+              htmlOutput('countries'),
+              tabsetPanel(
+                tabPanel(
+                    title = 'Population - Forecasting',
+                    div(class = 'models_run_btn',
+                        style = 'display: flex; justify-content: space-between;',
+
+                        prettyRadioButtons(
+                          inputId = "choose_models_pop",
+                          label = "Escolha seus Modelos:",
+                          choices = c("XgBoost",
+                                      "Random Forest", "SVR", "ChatGPT"),
+                          inline = TRUE,
+                          # individual = TRUE,
+                          # checkIcon = list(
+                          #   yes = tags$i(class = "fa fa-circle",
+                          #                style = "color: steelblue"),
+                          #   no = tags$i(class = "fa fa-circle-o",
+                          #               style = "color: steelblue"))
+                        )),
+
+                        highchartOutput(outputId = 'forecasting_pop', height = 'fit-content')
+
+
+
+                ),
+                tabPanel(
+                  title = 'Life Expactancy - Forecasting',
+                  div(class = 'models_run_btn',
+                      style = 'display: flex; justify-content: space-between;',
+
+                      prettyRadioButtons(
+                        inputId = "choose_models_life",
+                        label = "Escolha seus Modelos:",
+                        choices = c("XgBoost",
+                                    "Random Forest", "SVR", "ChatGPT"),
+                        inline = TRUE,
+                        # individual = TRUE,
+                        # checkIcon = list(
+                        #   yes = tags$i(class = "fa fa-circle",
+                        #                style = "color: steelblue"),
+                        #   no = tags$i(class = "fa fa-circle-o",
+                        #               style = "color: steelblue"))
+                      ),
+
+                      shiny::actionButton(inputId = 'action_btn_life', label = 'Run - Forecasting')),
+
+                  highchartOutput(outputId = 'forecasting_life', height = 'fit-content')
+
+
+
+                ),
+                tabPanel(
+                  title = 'GDP Percapita - Forecasting',
+                  div(class = 'models_run_btn',
+                      style = 'display: flex; justify-content: space-between;',
+
+                      prettyRadioButtons(
+                        inputId = "choose_models_gdp",
+                        label = "Escolha seus Modelos:",
+                        choices = c("XgBoost",
+                                    "Random Forest", "SVR", "ChatGPT"),
+                        inline = TRUE,
+                        # individual = TRUE,
+                        # checkIcon = list(
+                        #   yes = tags$i(class = "fa fa-circle",
+                        #                style = "color: steelblue"),
+                        #   no = tags$i(class = "fa fa-circle-o",
+                        #               style = "color: steelblue"))
+                      ),
+
+
+                      shiny::actionButton(inputId = 'action_btn_gdp', label = 'Run - Forecasting')),
+
+                  highchartOutput(outputId = 'forecasting_gdp', height = 'fit-content')
+
+                )
+
+              )
+
+
+          )
+
+
+        ),
+#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          div(
+            class = 'app_overview',
+
+            div(class = 'top_overview_card',
+                style = ' width: 100%;height: 100px',
+                h5("Population"),
+                p('During the last 30 days, the peak user volume is 5403')
+
+            ),
+
+
+
+            div(class = 'overview_cards',
+                style = 'display: flex; flex-wrap: wrap;  gap: 2em; padding-top:1em;',
+              div(class = 'cards_row_1',
+                  style = 'width: 100%;display: flex; gap: 2em; height: fit-content;',
+
+                div(class = 'overview_card_1',
+                    style = 'grid-area: top1; height: fit-content; ',
+                    h5('Daily Visitor Trend'),
+                    p('Active User - Last 24 Hours'),
+                    highchartOutput(outputId = 'visitor_chart', height = 'fit-content')
+                ),
+
+                div(class = 'overview_card_2',
+                    style = 'grid-area: top2; height: fit-content; ',
+                    h5('Daily Traffic Trend'),
+                    p('Network Traffic - Last 24 Hours'),
+                    highchartOutput(outputId = 'traffic_chart', height = 'fit-content'))
+                ),
+              div(class = 'cards_row_2',
+                  style = 'width: 100%;display: flex; gap: 2em; height: fit-content;',
+
+                div(class = 'overview_card_3',
+                    style = 'grid-area: top3; height: fit-content; ',
+                    h5('Operational Impact'),
+                    p('Effect of Accidents - Last 90 Days'),
+                    highchartOutput(outputId = 'operational_chart', height = 'fit-content')),
+
+                div(class = 'overview_card_4',
+                    style = 'grid-area: top4; height: fit-content;',
+                    h5('Uptime'),
+                    p('Active User - Last 90 Days'),
+                    highchartOutput(outputId = 'uptime_chart', height = 'fit-content'))
+            ))
+            # reactableOutput(ns('table_right'), width = 'auto')
+#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          )
+        )
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+  # )
+
+
+
+
+)
+
+server <- function(input, output, session) {
+  # server_function()
+
+  click_js <-
+    JS("function(event) {Shiny.onInputChange('treemapclick', event.point.name);}")
+
+
+  rv <- reactiveValues(country = NULL)
+
+  observe({
+    rv$country <- input$treemapclick
+  })
+
+  observe(if (input$custom_select == 'Asia') {
+    rv$country <- 'China'
+  } else{
+    if (input$custom_select == 'Europe') {
+      rv$country <- 'Germany'
+    } else{
+      if (input$custom_select == 'Africa') {
+        rv$country <- 'Egypt'
+
+
+      } else{
+        if (input$custom_select == 'Americas') {
+          rv$country <- 'United States'
+
+        } else{
+          if (input$custom_select == 'Oceania') {
+            rv$country <- 'Australia'
+
+          }
+        }
+
+      }
+
+    }
+
+  })
+
+
+  output$hcontainer <- renderHighchart({
+    gapminder::gapminder %>%
+      dplyr::filter(year  == 2007) %>%
+      dplyr::filter(continent  == input$custom_select) %>%
+
+
+      highcharter::data_to_hierarchical(group_vars = c(continent, country),
+
+                                        size_var = pop) %>%
+      hchart(type = "treemap", colorByPoint = TRUE) %>%
+      hc_plotOptions(treemap = list(events = list(click = click_js)))
+  })
+
+  output$visitor_chart <- renderHighchart({
+    gapminder <- gapminder::gapminder %>%
+      dplyr::filter(continent == input$custom_select, country == rv$country) %>%
+      dplyr::select(year, country, pop, continent)
+
+    hchart(gapminder,
+           "bubble",
+           hcaes(x = year, y = pop, size = pop),
+           colorByPoint = TRUE) %>%
+      hc_size(height = 200) %>%
+      hc_xAxis(title = list(text = '')) %>%
+      hc_yAxis(title = list(text = '')) %>%
+      hc_chart(borderWidth = 0) %>%
+      hc_plotOptions(series = list(marker = list(lineWidth = 0)))
+
+
+  })
+
+
+  output$traffic_chart <- renderHighchart({
+    gapminder <- gapminder::gapminder %>%
+      dplyr::filter(continent == input$custom_select, country == rv$country) %>%
+      dplyr::select(year, country, pop, continent, lifeExp)
+
+    hchart(gapminder,
+           "bubble",
+           hcaes(x = year, y = lifeExp, size = pop),
+           colorByPoint = TRUE) %>%
+      hc_size(height = 200) %>%
+      hc_xAxis(title = list(text = '')) %>%
+      hc_yAxis(title = list(text = '')) %>%
+      hc_chart(borderWidth = 0)
+
+
+  })
+
+
+  output$operational_chart <- renderHighchart({
+    gapminder <- gapminder::gapminder %>%
+      dplyr::filter(continent == input$custom_select, country == rv$country) %>%
+      dplyr::select(year, country, pop, continent, gdpPercap)
+
+    hchart(gapminder,
+           "bubble",
+           hcaes(x = year, y = gdpPercap, size = pop),
+           colorByPoint = TRUE) %>%
+      hc_size(height = 200) %>%
+      hc_xAxis(title = list(text = '')) %>%
+      hc_yAxis(title = list(text = '')) %>%
+      hc_chart(borderWidth = 0)
+
+
+  })
+
+
+  output$uptime_chart <- renderHighchart({
+    gapminder <- gapminder::gapminder %>%
+      dplyr::filter(continent == input$custom_select, country == rv$country) %>%
+      dplyr::select(year, country, pop, continent)
+
+    hchart(gapminder,
+           "bubble",
+           hcaes(x = year, y = pop, size = pop),
+           colorByPoint = TRUE) %>%
+      hc_size(height = 200) %>%
+      hc_xAxis(title = list(text = '')) %>%
+      hc_yAxis(title = list(text = '')) %>%
+      hc_chart(borderWidth = 0)
+
+
+  })
+
+
+
+  # input$action_btn
+  gapminder_df <- reactive({
+    gapminder::gapminder %>%
+      dplyr::filter(continent == input$custom_select, country == rv$country) %>%
+      dplyr::select(year, pop) %>%
+      dplyr::bind_rows(data.frame(year = seq(2010, 2050, by = 5))) %>%
+      dplyr::mutate(
+        pop_model_1 = replace(pop, is.na(pop), sample(
+          seq(pop[1], pop[12], 1000),
+          size = sum(is.na(pop)),
+          replace = TRUE
+        )),
+
+        pop_model_2 = replace(pop, is.na(pop), sample(
+          seq(pop[1], pop[12], 1000),
+          size = sum(is.na(pop)),
+          replace = TRUE
+        )),
+
+        pop_model_3 = replace(pop, is.na(pop), sample(
+          seq(pop[1], pop[12], 1000),
+          size = sum(is.na(pop)),
+          replace = TRUE
+        )),
+
+        pop_model_4 = replace(pop, is.na(pop), sample(
+          seq(pop[1], pop[12], 1000),
+          size = sum(is.na(pop)),
+          replace = TRUE
+        ))
+
+      )
+  })
+
+
+
+  output$forecasting_pop <- renderHighchart({
+    if (input$choose_models_pop == 'XgBoost') {
+      hchart(
+        gapminder_df(),
+        "spline",
+        hcaes(x = year, y = pop_model_1, size = pop_model_1),
+        colorByPoint = TRUE,
+      ) %>% chart_forecasting_function(data = gapminder_df(), model = input$choose_models_pop)
+
+    } else{
+      if (input$choose_models_pop == 'Random Forest') {
+        hchart(
+          gapminder_df(),
+          "spline",
+          hcaes(x = year, y = pop_model_2, size = pop_model_2),
+
+          colorByPoint = TRUE
+        ) %>% chart_forecasting_function(data = gapminder_df(), model = input$choose_models_pop)
+
+      } else{
+        if (input$choose_models_pop == 'SVR') {
+          hchart(
+            gapminder_df(),
+            "spline",
+            hcaes(
+              x = year,
+              y = pop_model_3,
+              size = pop_model_3
+            ),
+            colorByPoint = TRUE
+          ) %>% chart_forecasting_function(data = gapminder_df(),
+                                           model = input$choose_models_pop)
+
+        } else{
+          if (input$choose_models_pop == 'ChatGPT') {
+            hchart(
+              gapminder_df(),
+              "spline",
+              hcaes(
+                x = year,
+                y = pop_model_4,
+                size = pop_model_4
+              ),
+              colorByPoint = TRUE
+            ) %>% chart_forecasting_function(data = gapminder_df(),
+                                             model = input$choose_models_pop)
+
+          } else{
+
+          }
+
+        }
+
+      }
+
+
+    }
+
+
+  })
+
+  output$forecasting_life <- renderHighchart({
+    if (input$choose_models_pop == 'XgBoost') {
+      hchart(
+        gapminder_df(),
+        "spline",
+        hcaes(x = year, y = pop_model_1, size = pop_model_1),
+        colorByPoint = TRUE,
+      ) %>% chart_forecasting_function(data = gapminder_df(), model = input$choose_models_life)
+
+    } else{
+      if (input$choose_models_pop == 'Random Forest') {
+        hchart(
+          gapminder_df(),
+          "spline",
+          hcaes(x = year, y = pop_model_2, size = pop_model_2),
+
+          colorByPoint = TRUE
+        ) %>% chart_forecasting_function(data = gapminder_df(),
+                                         model = input$choose_models_life)
+
+      } else{
+        if (input$choose_models_pop == 'SVR') {
+          hchart(
+            gapminder_df(),
+            "spline",
+            hcaes(
+              x = year,
+              y = pop_model_3,
+              size = pop_model_3
+            ),
+            colorByPoint = TRUE
+          ) %>% chart_forecasting_function(data = gapminder_df(),
+                                           model = input$choose_models_life)
+
+        } else{
+          if (input$choose_models_pop == 'ChatGPT') {
+            hchart(
+              gapminder_df(),
+              "spline",
+              hcaes(
+                x = year,
+                y = pop_model_4,
+                size = pop_model_4
+              ),
+              colorByPoint = TRUE
+            ) %>% chart_forecasting_function(data = gapminder_df(),
+                                             model = input$choose_models_pop)
+
+          } else{
+
+          }
+
+        }
+
+      }
+
+
+    }
+
+
+  })
+
+  output$forecasting_gdp <- renderHighchart({
+    if (input$choose_models_gdp == 'XgBoost') {
+      hchart(
+        gapminder_df(),
+        "spline",
+        hcaes(x = year, y = pop_model_1, size = pop_model_1),
+        colorByPoint = TRUE,
+      ) %>% chart_forecasting_function(data = gapminder_df(), model = input$choose_models_life)
+
+    } else{
+      if (input$choose_models_gdp == 'Random Forest') {
+        hchart(
+          gapminder_df(),
+          "spline",
+          hcaes(x = year, y = pop_model_2, size = pop_model_2),
+
+          colorByPoint = TRUE
+        ) %>% chart_forecasting_function(data = gapminder_df(),
+                                         model = input$choose_models_life)
+
+      } else{
+        if (input$choose_models_gdp == 'SVR') {
+          hchart(
+            gapminder_df(),
+            "spline",
+            hcaes(
+              x = year,
+              y = pop_model_3,
+              size = pop_model_3
+            ),
+            colorByPoint = TRUE
+          ) %>% chart_forecasting_function(data = gapminder_df(),
+                                           model = input$choose_models_life)
+
+        } else{
+          if (input$choose_models_gdp == 'ChatGPT') {
+            hchart(
+              gapminder_df(),
+              "spline",
+              hcaes(
+                x = year,
+                y = pop_model_4,
+                size = pop_model_4
+              ),
+              colorByPoint = TRUE
+            ) %>% chart_forecasting_function(data = gapminder_df(),
+                                             model = input$choose_models_gdp)
+
+          } else{
+
+          }
+
+        }
+
+      }
+
+
+    }
+
+
+  })
+
+  output$countries <- renderUI({
+    h1("Machine Learning Forecasting for Population in ", rv$country)
+
+  })
+
+
+
+
+}
+
+shinyApp(ui, server)

@@ -1,0 +1,14 @@
+name: Treemap_Dashboard
+title: Treemap_Dashboard
+username:
+account: cfjardim
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7955874
+bundleId: 6682070
+url: https://cfjardim.shinyapps.io/Treemap_Dashboard/
+when: 1672343869.33119
+lastSyncTime: 1672343869.3312
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: app.R|lixo.R|module_ex_2.R|shiny_treemap_ex_1.R|shiny_treemap_ex_2.R
