@@ -19,40 +19,46 @@
 body{
     height: fit-content !important;
     padding: 2em;
-    background-color: #e2cca3;
-    background-image:
+    /*background-color: #e2cca3;*/
+    /*background-image:
     radial-gradient(at 47% 33%, hsl(39.75, 75%, 73%) 0, transparent 59%),
     radial-gradient(at 82% 65%, hsl(197.95, 51%, 93%) 0, transparent 55%);
 
-    background: linear-gradient(113deg, #bdb3a4 0%, #c1d5d9 50%, #a8ced5 100%);
+    background: linear-gradient(113deg, #bdb3a4 0%, #c1d5d9 50%, #a8ced5 100%);*/
 }
 
 *{
    font-family: 'Exo 2';
 }
 
+
+
 h1.dash_title
 {
-    background: whitesmoke;
+    background: black;
     box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
     border: 1px solid rgba(241, 224, 224, 0.67);
-    padding: .25em;
+    padding: .75em;
     font-family: 'Exo 2';
-        border-radius: 5px;
+    border-radius: 5px;
+    text-align: end;
+    color: whitesmoke;
 }
 
 
-.treemap_box_1box_2{
+.treemap_left_right{
   display: flex;
 
   gap: 2em;
 }
 
-.treemap, .app_overview{
 
-    background: whitesmoke;
+
+.left_column, .right_column{
+
+    background: transparent;
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(0px);
@@ -65,21 +71,57 @@ h1.dash_title
 }
 
 
-.treemap {
+.left_column {
     width: 50%;
 }
 
-.treemap #action_btn{
+
+#left_right_column-countries {
+    /*background: whitesmoke;
+    padding: 1em;
+    background: whitesmoke;
+    padding: 1em;
+    border: 6px #386ac7b5 double;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    position: relative;
+    width: fit-content;*/
+}
+
+.form-group.shiny-input-container{
+  /*width: 200px;
+    position: absolute;
+    top: 0;
+    left: 2em;*/
+}
+
+#left_right_column-chart_treemap{
+  background: whitesmoke;
+
+}
+
+#left_right_column-chart_treemap{
+  cursor: pointer;
+}
+
+
+.left_column #action_btn{
   float: right
       height: 40px !important;
 }
 
-.app_overview {
+.right_column {
     width: 50%;
 
     display: flex;
     flex-direction: column;
     background: transparent;
+}
+
+.right_column .top_overview_card .country_info .countries_list{
+  font-weight: 800;
+  font-size: 1.05em;
+
 }
 
 .top_overview_card,
@@ -94,12 +136,16 @@ h1.dash_title
     -webkit-backdrop-filter: blur(0px);
     border: 1px solid rgba(241, 224, 224, 0.67);
 
-    padding: 1em;
+
     flex: 1;
 }
 
 .top_overview_card{
-   flex: 0;
+    flex: 0;
+    border: 2px black double;
+    background: black;
+    color: white;
+    padding: 1em;
 }
 
 .overview_card_1,
@@ -108,6 +154,30 @@ h1.dash_title
 .overview_card_4{
     height: 300px;
 
+    border: 4px #00000045 double;
+    border-radius: 5px;
+
+}
+
+.overview_card_1 h5,
+.overview_card_2 h5,
+.overview_card_3 h5,
+.overview_card_4 h5{
+    background: black;
+    width: 100%;
+    margin:0px;
+    color: lightgray;
+    padding: .75em;
+
+}
+
+
+
+.overview_card_1 #left_right_column-div_chart,
+.overview_card_2 #left_right_column-traffic_chart,
+.overview_card_3 #left_right_column-operational_chart,
+.overview_card_4 #left_right_column-uptime_chart{
+  margin: 0 auto;
 }
 
 
