@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-::-webkit-scrollbar {
+
+/*::-webkit-scrollbar {
   width: 12px;
 }
 
@@ -14,7 +16,7 @@
   border-radius: 20px;
   border: 3px solid whitesmoke;
 }
-
+*/
 
 body{
     height: fit-content !important;
@@ -31,7 +33,10 @@ body{
    font-family: 'Exo 2';
 }
 
-
+.svg_icon{
+    float: left;
+    filter: invert(100%) sepia(82%) saturate(2%) hue-rotate(60deg) brightness(106%) contrast(101%);
+}
 
 h1.dash_title
 {
@@ -46,6 +51,8 @@ h1.dash_title
     text-align: end;
     color: whitesmoke;
 }
+
+
 
 
 .treemap_left_right{
@@ -66,13 +73,11 @@ h1.dash_title
     border: 1px solid rgba(241, 224, 224, 0.67);
 
     padding: 1em;
-
-
 }
 
 
 .left_column {
-    width: 50%;
+    width: 40%;
 }
 
 
@@ -86,6 +91,10 @@ h1.dash_title
     margin-bottom: 1em;
     position: relative;
     width: fit-content;*/
+}
+
+#left_right_column-countries h1 {
+    font-size: 2em;
 }
 
 .form-group.shiny-input-container{
@@ -111,7 +120,7 @@ h1.dash_title
 }
 
 .right_column {
-    width: 50%;
+    width: 60%;
 
     display: flex;
     flex-direction: column;
@@ -159,6 +168,14 @@ h1.dash_title
 
 }
 
+hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 0;
+    border-top: 1px solid #d5cfcf61;
+}
+
+
 .overview_card_1 h5,
 .overview_card_2 h5,
 .overview_card_3 h5,
@@ -179,6 +196,22 @@ h1.dash_title
 .overview_card_4 #left_right_column-uptime_chart{
   margin: 0 auto;
 }
+
+
+.metric_description{
+  font-size: .85em;
+
+  margin: 1em 0.5em;
+  background: lightslategray;
+  border-radius: 2px;
+  border: 2px solid lightslategray;
+}
+
+.metric_description p {
+   padding: 0.5em;
+   color: whitesmoke;
+}
+
 
 
 @media only screen and (max-width: 1000px){

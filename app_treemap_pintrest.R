@@ -5,23 +5,13 @@ library(highcharter)
 library(stringr)
 library(shinyjs)
 
-source('module_left_right_columns.R')
-source('R/chart_function_forecasting.R')
-# source('module_right_column.R')
-
-# https://stackoverflow.com/questions/66228047/click-event-in-highcharter-treemap-r-shiny
-
 ui <- fluidPage(
 
   useShinyjs(),
-  tags$style(
-    ".svg_icon{
-    float: left;
-    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
-}"
-  ),
 
-  tle = 'TREEMAP - Population',
+  includeCSS(path = 'www/css/style_treemap.css'),
+
+  title = 'TREEMAP - GAPMINDER',
 
   div(
     class = 'select_input_div',
@@ -30,16 +20,12 @@ ui <- fluidPage(
        class = 'dash_title',
        'TREEMAP - Dashboard')
   ),
-  includeCSS(path = 'www/css/style_pintrest.css'),
-
 # - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - -
     div(class  ='treemap_left_right',
 
         left_right_columns_UI('left_right_column')
        )
  )
-
-# reactableOutput(ns('table_right'), width = 'auto')
 
 
 server <- function(input, output, session) {
