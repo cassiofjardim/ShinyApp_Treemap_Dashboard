@@ -15,7 +15,12 @@ left_right_columns_UI <- function(id) {
           choices = unique(gapminder::gapminder$continent)
         ),
 
-        htmlOutput(outputId = ns('countries'))
+
+        htmlOutput(outputId = ns('countries')),
+
+        tags$img(class = 'svg_icon clickable', src = 'img/click_event.svg',
+                 width = '20px', height = '20px')
+
       ),
       highchartOutput(outputId = ns('chart_treemap'), height = 550)
     ),
@@ -191,7 +196,7 @@ left_right_columns_Server <- function(id) {
                "bubble",
 
                name = rv$country,
-               hcaes(x = year, y = pop, size = pop),
+               hcaes(x = year, y = round(pop,0), size = pop),
                colorByPoint = TRUE) %>%
             chart_treemap_dash(data = data_continent_country(), var = 'Population: ')
       })
@@ -202,7 +207,7 @@ left_right_columns_Server <- function(id) {
                "spline",
 
 
-               hcaes(x = year, y = lifeExp, size = lifeExp),
+               hcaes(x = year, y = round(lifeExp,0), size = lifeExp),
                colorByPoint = TRUE)%>%
           # hc_size(height = 200) %>%
           chart_treemap_dash(data = data_continent_country(), var = 'Life Expectancy: ')
@@ -216,7 +221,7 @@ left_right_columns_Server <- function(id) {
         hchart(data_continent_country(),
                "column",
 
-               hcaes(x = year, y = gdpPercap, size = gdpPercap),
+               hcaes(x = year, y = round(gdpPercap,0), size = gdpPercap),
                colorByPoint = TRUE) %>%
           # hc_size(height = 200) %>%
           chart_treemap_dash(data = data_continent_country(), var = 'GDP Percapita: ')
@@ -231,7 +236,7 @@ left_right_columns_Server <- function(id) {
 
 
             backgroundColor = 'red',
-               hcaes(x = year, y = pop, size = pop),
+               hcaes(x = year, y = round(pop,0), size = pop),
                colorByPoint = TRUE) %>%
           # hc_size(height = 200) %>%
           chart_treemap_dash(data = data_continent_country(), var = 'Comparision: ')
