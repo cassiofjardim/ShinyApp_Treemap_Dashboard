@@ -5,10 +5,10 @@ account: cfjardim
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7955874
-bundleId: 6823820
+bundleId: 6835457
 url: https://cfjardim.shinyapps.io/Treemap_Dashboard/
-when: 1675868208.64586
-lastSyncTime: 1675868208.64588
+when: 1676121713.29843
+lastSyncTime: 1676121713.29846
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: DELETE/app.R|DELETE/lixo.R|DELETE/module_ex_2.R|DELETE/shiny_treemap_ex_1.R|DELETE/shiny_treemap_ex_2.R|README.html|README.md
+ignoredFiles: .gitattributes|DELETE/chart_function_forecasting.R|DELETE/style.css|DELETE/style_tutorial.css|README.html|README.md

@@ -4,6 +4,9 @@ library(shinyWidgets)
 library(highcharter)
 library(stringr)
 library(shinyjs)
+library(reactable)
+library(reactablefmtr)
+
 
 ui <- fluidPage(
 
