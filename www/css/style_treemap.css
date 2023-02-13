@@ -246,6 +246,17 @@ hr {
   margin: 0 auto;
 }
 
+.overview_card_1 .nav-tabs,
+.overview_card_2 .nav-tabs{
+  display: flex;
+  justify-content: center;
+}
+
+.overview_card_1 .nav-tabs li a,
+.overview_card_2 .nav-tabs li a{
+  font-size: .95em;
+}
+
 
 .metric_description{
   font-size: .85em;
@@ -268,6 +279,8 @@ body{
   /*background: red;*/
 }
 }
+
+
 
 .nav-tabs>li>a {
     margin-right: 2px;

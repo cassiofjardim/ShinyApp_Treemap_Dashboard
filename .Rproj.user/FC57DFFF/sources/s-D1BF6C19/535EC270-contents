@@ -15,6 +15,7 @@ source(file = 'www/R/donwload_table_button.R')
 source(file = 'www/R/cards_chart_function.R')
 source(file = 'www/R/cards_functions.R')
 source(file = 'www/R/main_function_reactable.R')
+source(file = 'www/R/cards_tabsetpanels_function.R')
 
 
 ui <- fluidPage(

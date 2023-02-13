@@ -58,40 +58,69 @@ div(
           class = 'overview_cards',
           #********************************************************************************
 
-          function_cards_overview(
-            title = 'Teams Main Stats',
-            subtitle = 'Teams Most Importants Stats',
+          function_cards_tabsetpanel(
+            title = 'Number of Goals - Expected Goals: Goals - xG',
+            first_description_id = ns('xg_first_description'),
             card_number = 1,
-            chart_id = ns('main_stats'),
-            description_id = ns('card_description_1')
+            panel_title_1 = 'xG',
+            panel_title_2 = 'xGA',
+            panel_title_3 = 'xGD',
+            panel_title_4 = 'G_xG',
+            chart_id_1 = ns('xg_chart_1'),
+            chart_id_2 = ns('xg_chart_2'),
+            chart_id_3 = ns('xg_chart_3'),
+            chart_id_4 = ns('xg_chart_4'),
+            footer_description_id = ns('xg_footer_description')
           ),
 
-
-          function_cards_overview(
-            title = 'Expected Goals - Above and Bellow Average',
-            subtitle = 'Expected Goals',
+          function_cards_tabsetpanel(
+            title = 'Home and Away Metrics - Externals',
+            first_description_id = ns('home_away_first_description'),
             card_number = 2,
-            chart_id = ns('expected_goals'),
-            description_id = ns('card_description_2')
+            panel_title_1 = 'xG Home',
+            panel_title_2 = 'xG Away',
+            panel_title_3 = 'G_xG Home',
+            panel_title_4 = 'G_xG Away',
+            chart_id_1 = ns('home_away_chart_1'),
+            chart_id_2 = ns('home_away_chart_2'),
+            chart_id_3 = ns('home_away_chart_3'),
+            chart_id_4 = ns('home_away_chart_4'),
+            footer_description_id = ns('home_away_footer_description')
           ),
-          # ),
+
+
+          function_cards_tabsetpanel(
+            title = 'Standard Metrics',
+            first_description_id = ns('standard_first_description'),
+            card_number = 2,
+            panel_title_1 = 'Goals',
+            panel_title_2 = 'Assistances',
+            panel_title_3 = 'Goals + Assistances',
+            panel_title_4 = 'XG + xAG per Min.',
+            chart_id_1 = ns('standard_chart_1'),
+            chart_id_2 = ns('standard_chart_2'),
+            chart_id_3 = ns('standard_chart_3'),
+            chart_id_4 = ns('standard_chart_4'),
+            footer_description_id = ns('standard_footer_description')
+          ),
+
+          function_cards_tabsetpanel(
+            title = 'Progressions - Passing and Carries',
+            first_description_id = ns('progression_first_description'),
+            card_number = 2,
+            panel_title_1 = 'Passing Progression',
+            panel_title_2 = 'Carries Progression',
+            panel_title_3 = ' -- ',
+            panel_title_4 = ' --',
+            chart_id_1 = ns('progression_chart_1'),
+            chart_id_2 = ns('progression_chart_2'),
+            chart_id_3 = ns('progression_chart_3'),
+            chart_id_4 = ns('progression_chart_4'),
+            footer_description_id = ns('progression_footer_description')
+          )
           #********************************************************************************
 
-          function_cards_overview(
-            title = 'Number of Goals - Expected Goals: Goals - xG',
-            subtitle = 'Gols',
-            card_number = 3,
-            chart_id = ns('goals_expected_goals'),
-            description_id = ns('card_description_3')
-          ),
 
-          function_cards_overview(
-            title = '90 Minutes Stistics',
-            subtitle = 'Uptime',
-            card_number = 4,
-            chart_id = ns('passes_assistances'),
-            description_id = ns('card_description_4')
-          )
 
         )
       ),
@@ -251,7 +280,9 @@ left_right_columns_Server <- function(id) {
                    )
                  })
 
-
+#*******************************************************************************
+#**** PErformance Chart ********************************************************
+#*******************************************************************************
 
                  output$season_performance_chart <- renderHighchart({
                    hchart(
@@ -290,219 +321,518 @@ left_right_columns_Server <- function(id) {
                  })
 
 
-
-
-#*********** CARDS: Adicionando Gráficos + Texto ******************************
-#*********** CARDS: Adicionando Gráficos + Texto ******************************
-#*********** CARDS: Adicionando Gráficos + Texto ******************************
-
-
-                 output$main_stats <- renderHighchart({
-                   hchart(
-                     stats_league_table_df %>% filter(Squad == rv$country),
-                     'column',
-                     hcaes(
-                       x = Metrics,
-                       y = Metrics_Values
-                     ),
-                     colorByPoint = TRUE
-                   ) %>%
-                     charts_card_function(metric_name = 'xG') %>%
-                     hc_yAxis(title = list(text = "Metrics"))
-                 })
-
-
-
-                 output$card_description_1 <- renderUI({
-                   div(
-                     class = 'metric_description description_1',
-                     p(
-                       paste0(rv$country, ' - Destaques'),
-                       style = 'font-weight:400; font-family: "Roboto Condensed";font-size: 1.15em;"',
-                       tags$img(
-                         class = 'svg_icon',
-                         src = 'img/population.svg',
-                         width = '24px',
-                         height = '24px',
-                         style = 'float: right;'
-                       )
-                     ),
-                     p(
-                       glue::glue(
-                         'A Equipe {rv$country} na Temporada {unique(league_table()$Season_End_Year)}
-                         ficando na posição {abaixo_acima_average %>% filter(Squad == rv$country) %>% pull(Rk)}
-                         com o total de {abaixo_acima_average %>% filter(Squad == rv$country) %>% pull(Pts)} e
-                         Gols Esperados (xG) de {abaixo_acima_average %>% filter(Squad == rv$country) %>% pull(xG)}.
-                         Vale ressaltar que a Equipe {rv$country} obteve um valor
-                         {abaixo_acima_average %>% filter(Squad == rv$country) %>% pull(xG_Acima_Abaixo)} da média
-                         para a métrica Expected Goals do Campeonato.
-
-                         '
-                       )
-                     )
-                   )
-                 })
-#********************************************************************************
-                 output$expected_goals <- renderHighchart({
-                   hchart(
-                     league_table() ,
-                     'bubble',
-
-                     hcaes(x = Squad,
-                           y = xG,
-                           size = xG),
-                     colorByPoint = TRUE
-                   ) %>%
-                     charts_card_function(metric_name = 'Expected Goals: ') %>%
-
-                     hc_yAxis(plotLines = list(
-                       list(
-                         color = 'red',
-                         width = 2,
-                         dashStyle = "shortdash",
-                         label = list(text = 'Average(xG)'),
-                         value = unique(abaixo_acima_average$xG_average)
-                       )
-                     ),
-                     title = list(text = 'Expected Goals')
-                     )
-                 })
-
-                 output$card_description_2 <- renderUI({
-                   div(
-                     class = 'metric_description description_2',
-                     p(
-                       'Expected Goals',
-                       style = 'font-weight:400; font-family: "Roboto Condensed";font-size: 1.15em;"',
-                       tags$img(
-                         class = 'svg_icon',
-                         src = 'img/life.svg',
-                         width = '24px',
-                         height = '24px',
-                         style = 'float: right;'
-                       )
-                     ),
-                     p(
-                       glue::glue(
-                         "Expected goals (xG) is an analytical tool used to measure the
-                         quality of a team's scoring chances. It is important because
-                         it provides a more accurate measure of a team's attacking
-                         performance than simply looking at the number of goals scored.
-                         By looking at the xG of a team, analysts can better identify
-                         which teams are creating the best chances and are likely to
-                         score more goals in the future."
-                       )
-                     )
-                   )
-                 })
 #********************************************************************************
 
-                 output$goals_expected_goals <- renderHighchart({
-                   hchart(
-                     abaixo_acima_average ,
-                     'column',
+  output[[paste0('xg_chart_', 1)]] <-
+    renderHighchart({
+      hchart(
+        abaixo_acima_average,
+        'column',
 
-                     hcaes(x = Squad,
-                           y = G_xG),
-                     colorByPoint = TRUE
-                   ) %>%
-                     charts_card_function(metric_name = 'Goals - xG: ') %>%
+        hcaes(x = Squad,
+              y = abaixo_acima_average$xG),
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'xG') %>%
 
-                     hc_yAxis(plotLines = list(
-                       list(
-                         color = 'red',
-                         width = 2,
-                         dashStyle = "shortdash",
-                         label = list(text = 'Average(Goals - xG)',
-                                      # verticalAlign = 'top',
-                                      align = 'right'),
-                         value = unique(abaixo_acima_average$G_xG_average)
-                       )
-                     ),
-                     title = list(text = 'Goals - xG'))
-                 })
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'xG',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = unique(abaixo_acima_average$xG)
+          )
+        ),
+        title = list(text = 'xG'))
+    })
+
+  output[[paste0('xg_chart_', 2)]] <-
+    renderHighchart({
+      hchart(
+        abaixo_acima_average,
+        'column',
+
+        hcaes(x = Squad,
+              y = abaixo_acima_average$xGA),
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'xGA') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'xG',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = unique(abaixo_acima_average$xGA)
+          )
+        ),
+        title = list(text = 'xGA'))
+    })
+
+  output[[paste0('xg_chart_', 3)]] <-
+    renderHighchart({
+      hchart(
+        abaixo_acima_average,
+        'column',
+
+        hcaes(x = Squad,
+              y = abaixo_acima_average$xGD),
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'xGD') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'xG',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = unique(abaixo_acima_average$xGD)
+          )
+        ),
+        title = list(text = 'xGD'))
+    })
+
+  output[[paste0('xg_chart_', 4)]] <-
+    renderHighchart({
+      hchart(
+        abaixo_acima_average,
+        'column',
+
+        hcaes(x = Squad,
+              y = abaixo_acima_average$G_xG),
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'G_xG') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'xG',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = unique(abaixo_acima_average$G_xG)
+          )
+        ),
+        title = list(text = 'G_xG'))
+    })
 
 
-                 output$card_description_3 <- renderUI({
-                   div(
-                     class = 'metric_description description_3',
-                     p(
-                       'Nº Goals and Expected Goals: Goals - xG',
-                       style = 'font-weight:400; font-family: "Roboto Condensed";font-size: 1.15em;"',
-                       tags$img(
-                         class = 'svg_icon',
-                         src = 'img/goal.png',
-                         width = '24px',
-                         height = '24px',
-                         style = 'float: right;'
-                       )
-                     ),
-                     p(
-                       glue::glue(
-                         "The difference between a team's number of goals and their
-                         expected goals (xG) can help to identify which teams are
-                         creating the best chances and whether they are finishing
-                         their chances effectively or not. If a team has scored more
-                         goals than their xG suggests, it could indicate that the team
-                         is taking advantage of their chances better than expected
-                         and is likely to continue to score goals at a higher rate.
-                         On the other hand, if a team has scored fewer goals than their
-                         xG suggests, it could indicate that the team is not finishing
-                         their chances effectively and could be at risk of not scoring
-                         as many goals in the future."
-                       )
-                     )
-                   )
-                 })
 
-#*******************************************************************************
-                 output$passes_assistances <- renderHighchart({
-                   hchart(standard_stats_df %>% filter(Team_or_Opponent == 'team'),
-                          'bubble',
-                          name = '',
+  output$xg_first_description <- renderUI({
+    div(
+      class = 'metric_description description_1',
+      p(
+        glue::glue(
+          "The difference between a team's number of goals and their expected
+          goals (xG) can help to identify which teams are creating the best
+          chances and whether they are finishing their chances effectively or not."
+        )
+      )
+    )
+  })
 
-                          hcaes(x = Squad,
-                                y = PrgC_Progression,
-                                size = PrgC_Progression),
-                          colorByPoint = TRUE) %>%
-                     charts_card_function(metric_name = 'Prog. Carries')
-
-
-                 })
-
-                 output$card_description_4 <- renderUI({
-                   div(
-                     class = 'metric_description description_4',
-                     p(
-                       'Passes x Assistances:',
-                       style = 'font-weight:400; font-family: "Roboto Condensed";font-size: 1.15em;"',
-                       tags$img(
-                         class = 'svg_icon',
-                         src = 'img/population.svg',
-                         width = '24px',
-                         height = '24px',
-                         style = 'float: right;'
-                       )
-                     ),
-                     p(
-                       glue::glue(
-                         "Considering statistics per 90 minutes for a team's performance
-                         is important because it allows analysts to better compare a team's
-                         performance over a given period of time. By looking at a team's
-                         performance per 90 minutes, analysts can more accurately
-                         compare a team's performance regardless of whether they have
-                         played more or fewer games than their opponents.
-                         This metric also allows analysts to adjust for any
-                         external factors that may affect a team's performance,
-                         such as injuries or suspensions, since the analysis is
-                         based on the team's performance over a given period of time, not a single game.
-                         "
-                       )
-                     )
-                   )
-                 })
+  # output$xg_footer_description <- renderUI({
+  #   div(
+  #     class = 'metric_description description_1',
+  #     p(
+  #       glue::glue(
+  #         "The difference between a team's number of goals and their
+  #          expected goals (xG) can help to identify which teams are
+  #          creating the best chances and whether they are finishing
+  #          their chances effectively or not. If a team has scored more
+  #          goals than their xG suggests, it could indicate that the team
+  #          is taking advantage of their chances better than expected
+  #          and is likely to continue to score goals at a higher rate.
+  #          On the other hand, if a team has scored fewer goals than their
+  #          xG suggests, it could indicate that the team is not finishing
+  #          their chances effectively and could be at risk of not scoring
+  #          as many goals in the future."
+  #       )
+  #     )
+  #   )
+  # })
 
 
 
-               })
+  # charts_card_1_function <- function(x,z) {
+  #
+  #    output[[paste0('goals_expected_', x)]] <-
+  #     renderHighchart({
+  #       hchart(
+  #         abaixo_acima_average,
+  #         'column',
+  #
+  #         hcaes(x = Squad,
+  #               y = abaixo_acima_average[[z]]),
+  #         colorByPoint = TRUE
+  #       ) %>%
+  #         charts_card_function(metric_name = 'xG') %>%
+  #
+  #         hc_yAxis(plotLines = list(
+  #           list(
+  #             color = 'red',
+  #             width = 2,
+  #             dashStyle = "shortdash",
+  #             label = list(
+  #               text = 'xG',
+  #               verticalAlign = 'top',
+  #               y = -120,
+  #               x = -20,
+  #               align = 'right'
+  #             ),
+  #             value = unique(abaixo_acima_average[[z]])
+  #           )
+  #         ),
+  #         title = list(text = z))
+  #     })
+  # }
+  #
+  #   pmap(1:4,c('xG','xGA','xGD.90','G_xG'),
+  #        ~ charts_card_1_function(x = .x, z = .y))
+  output[[paste0('standard_chart_', 1)]] <-
+    renderHighchart({
+      hchart(
+        standard_df,
+        'column',
+
+        hcaes(x = Squad,y = Gls),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'Goals') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'Goals',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(standard_df$Gls)
+          )
+        ),
+        title = list(text = 'Goals'))
+    })
+
+
+
+  output[[paste0('standard_chart_', 2)]] <-
+    renderHighchart({
+      hchart(
+        standard_df,
+        'column',
+
+        hcaes(x = Squad,y = Ast),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'Assistance') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'Goals',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(standard_df$Ast)
+          )
+        ),
+        title = list(text = 'Assistance'))
+    })
+
+
+  output[[paste0('standard_chart_', 3)]] <-
+    renderHighchart({
+      hchart(
+        standard_df,
+        'column',
+
+        hcaes(x = Squad,y = G_plus_A),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'Goals + Assistance') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'Goals + Assistance',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(standard_df$G_plus_A)
+          )
+        ),
+        title = list(text = 'Goals + Assistance'))
+    })
+
+
+  output[[paste0('standard_chart_', 4)]] <-
+    renderHighchart({
+      hchart(
+        standard_df,
+        'column',
+
+        hcaes(x = Squad,y = xG_plus_xAG_Per_Minutes),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'xG + xAG') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'xG + xAG',
+              verticalAlign = 'top',
+              y = -120,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(standard_df$xG_plus_xAG_Per_Minutes)
+          )
+        ),
+        title = list(text = 'xG + xAG'))
+    })
+
+
+
+
+
+  output$standard_first_description <- renderUI({
+    div(
+      class = 'metric_description description_1',
+      p(
+        glue::glue(
+          "The difference between a team's number of goals and their expected
+          goals (xG) can help to identify which teams are creating the best
+          chances and whether they are finishing their chances effectively or not."
+        )
+      )
+    )
+  })
+
+  # output$standard_footer_description <- renderUI({
+  #   div(
+  #     class = 'metric_description description_1',
+  #     p(
+  #       glue::glue(
+  #         "The difference between a team's number of goals and their
+  #          expected goals (xG) can help to identify which teams are
+  #          creating the best chances and whether they are finishing
+  #          their chances effectively or not. If a team has scored more
+  #          goals than their xG suggests, it could indicate that the team
+  #          is taking advantage of their chances better than expected
+  #          and is likely to continue to score goals at a higher rate.
+  #          On the other hand, if a team has scored fewer goals than their
+  #          xG suggests, it could indicate that the team is not finishing
+  #          their chances effectively and could be at risk of not scoring
+  #          as many goals in the future."
+  #       )
+  #     )
+  #   )
+  # })
+
+  output$progression_first_description <- renderUI({
+    div(
+      class = 'metric_description description_1',
+      p(
+        glue::glue(
+          "The difference between a team's number of goals and their expected
+          goals (xG) can help to identify which teams are creating the best
+          chances and whether they are finishing their chances effectively or not."
+        )
+      )
+    )
+  })
+
+
+  output$home_away_first_description <- renderUI({
+    div(
+      class = 'metric_description description_1',
+      p(
+        glue::glue(
+          "The difference between a team's number of goals and their expected
+          goals (xG) can help to identify which teams are creating the best
+          chances and whether they are finishing their chances effectively or not."
+        )
+      )
+    )
+  })
+
+  output[[paste0('home_away_chart_', 1)]] <-
+    renderHighchart({
+      hchart(
+        home_away_stats_df,
+        'column',
+
+        hcaes(x = Squad,y = xG_Home),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'xG Home') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'xG Home',
+              verticalAlign = 'top',
+              y = -100,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(home_away_stats_df$xG_Home)
+          )
+        ),
+        title = list(text = 'xG Home'))
+    })
+
+
+  output[[paste0('home_away_chart_', 2)]] <-
+    renderHighchart({
+      hchart(
+        home_away_stats_df,
+        'column',
+
+        hcaes(x = Squad,y = xG_Away),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'xG Away') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'xG Away',
+              verticalAlign = 'top',
+              y = -100,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(home_away_stats_df$xG_Away)
+          )
+        ),
+        title = list(text = 'xG Away'))
+    })
+
+
+  output[[paste0('home_away_chart_', 3)]] <-
+    renderHighchart({
+      hchart(
+        home_away_stats_df,
+        'column',
+
+        hcaes(x = Squad,y = G_xG_Home),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'G - xG Home') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'G - xG Home',
+              verticalAlign = 'top',
+              y = -100,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(home_away_stats_df$G_xG_Home)
+          )
+        ),
+        title = list(text = 'G - xG Home'))
+    })
+
+
+  output[[paste0('home_away_chart_', 4)]] <-
+    renderHighchart({
+      hchart(
+        home_away_stats_df,
+        'column',
+
+        hcaes(x = Squad,y = G_xG_Away),
+
+        colorByPoint = TRUE
+      ) %>%
+        charts_card_function(metric_name = 'G - xG Away') %>%
+
+        hc_yAxis(plotLines = list(
+          list(
+            color = 'red',
+            width = 2,
+            dashStyle = "shortdash",
+            label = list(
+              text = 'G - xG Away',
+              verticalAlign = 'top',
+              y = -100,
+              x = -20,
+              align = 'right'
+            ),
+            value = mean(home_away_stats_df$G_xG_Away)
+          )
+        ),
+        title = list(text = 'G - xG Away'))
+    })
+
+
+
+
+
+
+
+     })
 }

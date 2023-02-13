@@ -1,6 +1,4 @@
 
-
-
 stats_league_table_df <- league_table_df %>%   mutate(G_xG = round(GF-xG,2))%>%
   dplyr::select(Competition_Name,Season_End_Year,Squad,
                 Rk,-Rk_sizing,W,Pts,GF,xG,xGA,xGD,xGD.90,G_xG) %>%
@@ -33,3 +31,11 @@ abaixo_acima_average <- league_table_df %>%
 
 
 standard_stats_df <- standard_df %>% select(Squad:Poss,Gls:G_plus_A,PrgC_Progression:last_col())
+
+
+home_away_stats_df <- league_away_home_df %>% select(Competition_Name,Season_End_Year,Squad,Rk,
+                               xG_Home,GF_Home,
+                               xG_Away,GF_Away) %>% mutate(
+                                 G_xG_Home = GF_Home - xG_Home,
+                                 G_xG_Away = GF_Away - xG_Away)
+
