@@ -1,10 +1,7 @@
 function_cards_overview <- function(title, subtitle,card_number,chart_id, description_id){
 
   div(class = paste0('overview_card_',card_number),
-      style = 'grid-area: top1;
-      height: fit-content; padding: 1em;
-      width: 300px;
-      scroll-snap-align: end;',
+      style = 'grid-area: top1; height: fit-content;width: 45%;',
       div(class = 'title_toggle_1',
           style = 'display: flex;
           flex-direction: column',
@@ -13,15 +10,14 @@ function_cards_overview <- function(title, subtitle,card_number,chart_id, descri
              title, style = 'display: flex; align-items: center;
              justify-content: space-between;'),
           h6(subtitle, style = 'font-weight: 700;padding: 0 1em;')
-          # materialSwitch(inputId = ns("checkbox_1"))
       ),
 
       shiny::hr(class = 'horizontal_line',style = ''),
 
       highchartOutput(chart_id,
-                      height = 'fit-content', width = 'auto'),
+                      height = 'fit-content'),
 
-      htmlOutput(outputId = description_id, width = 300)
+      htmlOutput(outputId = description_id)
 
   )
 
