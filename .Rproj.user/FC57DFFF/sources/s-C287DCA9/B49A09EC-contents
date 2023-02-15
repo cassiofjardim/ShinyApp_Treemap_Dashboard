@@ -68,4 +68,4 @@ passing_types <-worldfootballR::fb_season_team_stats(country = 'ENG',
 # write.csv(x = passing_types,file = 'www/sql_data_base/passing_types.csv')
 
 
-# passing_types <- read.csv(file = 'www/sql_data_base/passing_types.csv')
+passing_types <- read.csv(file = 'www/sql_data_base/passing_types.csv')

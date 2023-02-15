@@ -249,81 +249,129 @@ left_right_columns_Server <- function(id) {
                        tags$img(
                          class = 'top_card_icon',
                          src = paste0('img/2021/', rv$country, '.png')
-                       ),
-
-                       tags$ul(
-                         class = 'clubs_stats_info',
-                         tags$li(class = 'teams_list',
-                                 tags$span(
-                                   class = 'stats',
-                                   paste0(
-                                     'Posição:',
-                                     ' ',
-                                     league_table() %>% filter(Squad == rv$country) %>% pull(Rk),
-                                     'º'
-                                   )
-                                 )),
-                         tags$li(class = 'teams_list',
-                                 tags$span(
-                                   class = 'stats',
-                                   paste0(
-                                     'Vitórias:',
-                                     ' ',
-                                     league_table() %>% filter(Squad == rv$country) %>% pull(W)
-                                   )
-                                 )),
-                         tags$li(class = 'teams_list',
-                                 tags$span(
-                                   class = 'stats',
-                                   paste0(
-                                     'Pontos:',
-                                     ' ',
-                                     league_table() %>% filter(Squad == rv$country) %>% pull(Pts)
-                                   )
-                                 ))
                        )
+
+                       # tags$ul(
+                       #   class = 'clubs_stats_info',
+                       #   tags$li(class = 'teams_list',
+                       #           tags$span(
+                       #             class = 'stats',
+                       #             paste0(
+                       #               'Posição:',
+                       #               ' ',
+                       #               league_table() %>% filter(Squad == rv$country) %>% pull(Rk),
+                       #               'º'
+                       #             )
+                       #           )),
+                       #   tags$li(class = 'teams_list',
+                       #           tags$span(
+                       #             class = 'stats',
+                       #             paste0(
+                       #               'Vitórias:',
+                       #               ' ',
+                       #               league_table() %>% filter(Squad == rv$country) %>% pull(W)
+                       #             )
+                       #           )),
+                       #   tags$li(class = 'teams_list',
+                       #           tags$span(
+                       #             class = 'stats',
+                       #             paste0(
+                       #               'Pontos:',
+                       #               ' ',
+                       #               league_table() %>% filter(Squad == rv$country) %>% pull(Pts)
+                       #             )
+                       #           ))
+                       # )
                      )
                    )
                  })
 
 #*******************************************************************************
-#**** PErformance Chart ********************************************************
+#**** Performance Chart ********************************************************
 #*******************************************************************************
+
+
 
                  output$season_performance_chart <- renderHighchart({
                    hchart(
-                     league_table(),
+                     df_weeks_perforance %>%
+                       select(weeks,rv$country),
                      'spline',
                      hcaes(
-                       x = Squad,
-                       y = xG
+                       x = 1:38,
+                       y = sort(df_weeks_perforance[[!!!rv$country]]),
+                       name = x
                      ),
-                     colorByPoint = TRUE
+
+
+                     color = 'white'
                    ) %>%
                      charts_card_function(metric_name = 'xG') %>%
                      hc_yAxis(title = list(text = "Week Ranking",
-                                           style = list(color = 'whitesmoke')),
+                                           style = list(color = 'white')),
+
                               labels = list(
-                                style = list(color =  'whitesmoke',
+                                style = list(color = 'white',
                                              fontSize = '12px',
-                                             fontWeight = 'bold',
+                                             # fontWeight = 'bold',
                                              fontFamily = "Roboto Condensed")
                               ),
                               tickAmount = 6,
                               gridLineWidth = 0.5,
                               gridLineColor = 'gray',
                               gridLineDashStyle = "longdash")%>%
-                     hc_xAxis(title = list(text = "",
-                                           style = list(color = 'whitesmoke')),
+                     hc_xAxis(title = list(text = "Rodadas",
+                                           style = list(color = 'white',
+                                                        fontSize = '12px')),
+                              opposite = TRUE,
+                              tickInterval= 1,
+                              lineWidth = 0,
+                              tickLength = 3.5,
+
+                              offset = 0,
+                              plotLines = list(
+                                list(
+                                  color = 'whitesmoke',
+                                  width = 1,
+                                  dashStyle = "shortdash",
+                                  value = 18
+                                )
+                              ),
                               labels = list(
 
 
-                                style = list(color =  'whitesmoke',
-                                             fontWeight = 'bold',
+                                style = list(color =  'white',
+                                             # fontWeight = 'bold',
                                              fontSize = '12px',
                                              fontFamily = "Roboto Condensed")
                               )
-                     )
+                     ) %>%
+
+                     hc_plotOptions(
+
+
+                       series = list(borderRadius = 3.5,
+                                     marker = list(enabled = FALSE),
+                                     lineWidth = 2,
+                                     shadow = TRUE,
+                                     fillOpacity = 0.25,
+                                     fillColor = list(
+                                       linearGradient = list(
+                                         x1 = 0, x2 = 1,
+                                         y1 = 0 , y2 = 1 ),
+                                       stops = list(
+                                         list(0.1, '#598ed9'),
+                                         list(0.50,'#8eadda'),
+                                         list(1, '#598ed9')
+                                       )
+                                     )
+                       )) %>%
+                     hc_tooltip(
+                       headerFormat = '<b>Rodada nº: {point.x}</b><br/>',
+                       pointFormat = paste0('Posição: '," {point.y:,.0f}º")) %>%
+                     hc_add_series(data = sort(df_weeks_perforance$`Norwich City`),
+                                   type = "spline",
+                                   color = '#B0DDD6')
                  })
 
 
@@ -473,12 +521,22 @@ panels_title <- c('xG','xGA','xGD','G_xG')
 
       hchart(
         home_away_stats_df,
-        'column',
+        'bubble',
+        showInLegend = F,
         hcaes(x = Squad,
+              group = home_away_stats_df$Squad,
               y = home_away_stats_df[[!!var]],
               color = home_away_stats_df$colors)
       ) %>%
-        charts_card_function(metric_name = var) %>%
+        hc_plotOptions(
+          series = list(
+            dataLabels = list(
+              enabled = TRUE,
+              format = '{point.y}',
+              allowOverlap = TRUE
+            )
+            ))%>%
+        # charts_card_function(metric_name = var) %>%
 
         hc_yAxis(plotLines = list(
           list(

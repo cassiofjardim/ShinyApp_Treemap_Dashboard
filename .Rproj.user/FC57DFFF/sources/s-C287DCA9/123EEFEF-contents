@@ -37,3 +37,26 @@ home_away_stats_df <- league_away_home_df %>% select(Competition_Name,Season_End
                                  G_xG_Away = GF_Away - xG_Away) %>%
   mutate(colors = colors1)
 
+
+
+
+teams <- league_table_df$Squad %>% as.list()
+teams_positions <- sample(trunc(runif(n = 38,1,20),0))
+
+
+
+teams_list <- list()
+for(i in 1:20){
+
+  teams_list[[i]] <- sample(trunc(runif(n = 38,1,20),0))
+
+}
+
+df_weeks_perforance <- teams_list %>%
+                          set_names(teams) %>%
+                          as.data.frame() %>%
+                          mutate(weeks = 1:38, .before = everything())%>% set_names('weeks',teams)
+
+
+
+

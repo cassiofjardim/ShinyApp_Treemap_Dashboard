@@ -70,6 +70,7 @@ h1.dash_title{
     background: rgb(2,0,36);
 background: linear-gradient(270deg, rgba(2,0,36,1) 0%, rgba(128,131,131,0.6096813725490196) 100%);
 border-left: 10px solid whitesmoke;
+background: #000000b8;
 }
 
 
@@ -123,6 +124,7 @@ border-left: 10px solid whitesmoke;
   margin-bottom: 0.5em;
   border-left: 10px solid white;
   background: linear-gradient(270deg, rgba(2,0,36,1) 0%, rgba(128,131,131,0.6096813725490196) 100%);
+  background: #000000b8;
 
 }
 
@@ -186,9 +188,10 @@ border-left: 10px solid whitesmoke;
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(128,131,131,0.6096813725490196) 100%);
     border-radius: 5px;
     padding: 0 1em;
-    border-left: 10px solid white;
-    border-top: 10px solid whitesmoke;
+    border-left: 5px solid white;
+    border-top: 5px solid whitesmoke;
     margin-bottom: 1em;
+    background: #000000b8;
 }
 
 .overview_cards{
@@ -215,27 +218,24 @@ border-left: 10px solid whitesmoke;
 
 .top_card ul.clubs_stats_info li {
     padding: 0.25em;
+    width: 100%;
+    background: black;
+
+    text-align: end;
+    list-style: none;
+    font-weight: 700;
+    font-size: 1.5em;
 }
 
 .overview_card_1,
 .overview_card_2,
-
+.overview_card_3,
 .overview_card_4{
     height: 620px !important;
 
     border: 4px #00000045 double;
     border-radius: 5px;
 
-}
-
-.overview_card_3{
-  height: 660px !important;
-  background: whitesmoke;
-
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
-    border: 1px solid rgba(241, 224, 224, 0.67);
 }
 
 hr {
