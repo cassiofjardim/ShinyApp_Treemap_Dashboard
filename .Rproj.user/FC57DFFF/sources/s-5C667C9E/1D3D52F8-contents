@@ -219,13 +219,23 @@ border-left: 10px solid whitesmoke;
 
 .overview_card_1,
 .overview_card_2,
-.overview_card_3,
+
 .overview_card_4{
-    height: 300px;
+    height: 620px !important;
 
     border: 4px #00000045 double;
     border-radius: 5px;
 
+}
+
+.overview_card_3{
+  height: 660px !important;
+  background: whitesmoke;
+
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgba(241, 224, 224, 0.67);
 }
 
 hr {

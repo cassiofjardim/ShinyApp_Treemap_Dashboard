@@ -18,9 +18,9 @@ library(reactablefmtr)
 
 library(scales)
 colors1 <- alpha(c("#6CADDF", "#C8102E", "#034694", "#132257", "#EF0107",
-                   "#E03A3E", "#7A263A", "#0053A0", "#0057B8", "#FDB913",
-                   "#241F20", "#1B458F", "#F5A3C7", "#95BFE5", "#D71920",
-                   "#274488", "#FFCD00", "#6C1D45", "#FBEE23", "#00A650"),.5)
+           "#E03A3E", "#7A263A", "#0053A0", "#0057B8", "#FDB913",
+           "#241F20", "#1B458F", "#F5A3C7", "#95BFE5", "#D71920",
+           "#274488", "#FFCD00", "#6C1D45", "#FBEE23", "#00A650"),.5)
 
 
 
@@ -56,5 +56,16 @@ standard_df <- standard_df[1:20,]
 #                                                      stat_type = 'passing')
 #
 # write.csv(x = passing,file = 'www/sql_data_base/passing.csv')
-# passing_df <- read.csv(file = 'www/sql_data_base/passing.csv')
+passing_df <- read.csv(file = 'www/sql_data_base/passing.csv')
 
+
+passing_types <-worldfootballR::fb_season_team_stats(country = 'ENG',
+                                                     gender = "M",
+                                                     season_end_year = '2022',
+                                                     tier = '1st',
+                                                     stat_type = 'passing_types')
+#
+# write.csv(x = passing_types,file = 'www/sql_data_base/passing_types.csv')
+
+
+# passing_types <- read.csv(file = 'www/sql_data_base/passing_types.csv')

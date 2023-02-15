@@ -26,18 +26,14 @@ abaixo_acima_average <- league_table_df %>%
 
 
 standard_stats_df <- standard_df %>%
-  select(Squad:Poss,Gls:G_plus_A,PrgC_Progression:last_col()) %>%
+                    select(Squad:Poss,Gls:G_plus_A,PrgC_Progression:last_col()) %>%
   mutate(colors = colors1)
 
 
 home_away_stats_df <- league_away_home_df %>% select(Competition_Name,Season_End_Year,Squad,Rk,
-                                                     xG_Home,GF_Home,
-                                                     xG_Away,GF_Away) %>% mutate(
-                                                       G_xG_Home = GF_Home - xG_Home,
-                                                       G_xG_Away = GF_Away - xG_Away) %>%
+                               xG_Home,GF_Home,
+                               xG_Away,GF_Away) %>% mutate(
+                                 G_xG_Home = GF_Home - xG_Home,
+                                 G_xG_Away = GF_Away - xG_Away) %>%
   mutate(colors = colors1)
-
-
-
-
 

@@ -15,20 +15,26 @@ table_style <-
         highlight = TRUE,
         bordered = TRUE,
         defaultPageSize = 5,
+        # filterable = TRUE,
 
         theme = reactable::reactableTheme(
           borderColor = "lightgray",
           borderWidth = 1.5,
           stripedColor = "#f6f8fa",
           highlightColor = "#f0f5f9",
+          backgroundColor = '#fff', # cells background
           cellPadding = cellPadding,
           style = list(fontFamily = "Roboto Condensed",
                        fontSize = fontsize),
           searchInputStyle = list(width = "100%"),
           # tableStyle = list(border = '2px'),
 
-          headerStyle = list(padding = '7.5px'),
-          cellStyle = list(padding = '10px')
+          headerStyle = list(
+            # padding = '7.5px',
+            background = "whitesmoke"),
+
+          footerStyle = list(backgroundColor = "whitesmoke")
+          # cellStyle = list(padding = '10px')
 
         ),
 
@@ -36,7 +42,9 @@ table_style <-
           vAlign = "center",
           headerVAlign = "bottom",
           align = 'center',
-          style  = list(fontWeight = "bold"),
+
+          style  = list(fontWeight = "bold", backgroundColor = 'whitesmoke'),
+          headerStyle = list(background = "whitesmoke"),
 
           footerStyle = list(fontWeight = "bold")
         ),
@@ -46,12 +54,13 @@ table_style <-
             name = "Position",
             style = list(
               fontSize = fontsize,
+              background = "white"
 
-              background = "rgba(0, 0, 0, 0.05)"
+              # background = "rgba(0, 0, 0, 0.05)"
             ),
             headerStyle = list(position = "sticky",
                                left = 0,
-                               background = "#fff",
+                               background = "white",
                                zIndex = 1)
 
           ),
@@ -60,38 +69,39 @@ table_style <-
             name = "Temporada",
             style = list(
               fontSize = fontsize,
+              background = "white"
 
-              background = "rgba(0, 0, 0, 0.05)"
+              # background = "rgba(0, 0, 0, 0.05)"
             ),
             headerStyle = list(position = "sticky",
                                left = 0,
-                               background = "#fff",
-                               zIndex = 1)
+                               background = "white",
+                               zIndex = 0)
 
           ),
 
           Squad = reactable::colDef(
             name = "Equipes",
-            minWidth = 140,
+            minWidth = 150,
             style = list(
               fontSize = fontsize,
               position = "sticky",
 
               left = 0,
-              background = "#fff",
+              background = "white",
               zIndex = 1,
               background = "rgba(0, 0, 0, 0.05)"
             ),
             headerStyle = list(position = "sticky",
                                left = 0,
-                               background = "#fff",
+                               background = "white",
                                zIndex = 1),
 
             cell = function(value){
               img_src <- knitr::image_uri(paste0('www/img/2021/',value,'.png'))
               tagList(
                 div(
-                  style  ='display: flex;',
+                  style  ='display: flex;gap:2em;font-weight: 700;',
                 tags$img(src = img_src, width = '36px', height = '36px'),
                 value))
             }
@@ -107,13 +117,13 @@ table_style <-
           #     position = "sticky",
           #     sticky = 'right',
           #     left = 0,
-          #     background = "#fff",
+          #     background = "blue",
           #     zIndex = 1,
           #     background = "rgba(0, 0, 0, 0.05)"
           #   ),
           #   headerStyle = list(position = "sticky",
           #                      left = 0,
-          #                      background = "#fff",
+          #                      background = "blue",
           #                      zIndex = 1)
           #
           # )
