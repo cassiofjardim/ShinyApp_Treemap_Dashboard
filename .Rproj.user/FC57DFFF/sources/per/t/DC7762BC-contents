@@ -525,7 +525,7 @@ panels_title <- c('xG','xGA','xGD','G_xG')
         showInLegend = F,
         hcaes(x = Squad,
               group = home_away_stats_df$Squad,
-              y = home_away_stats_df[[!!var]],
+              y = round(home_away_stats_df[[!!var]],2),
               color = home_away_stats_df$colors)
       ) %>%
         hc_plotOptions(

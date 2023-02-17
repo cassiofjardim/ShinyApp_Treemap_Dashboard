@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 
-/*::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 12px;
 }
 
@@ -16,7 +16,7 @@
   border-radius: 20px;
   border: 3px solid whitesmoke;
 }
-*/
+
 
 body{
     height: fit-content !important;
@@ -171,7 +171,9 @@ background: #000000b8;
 .overview_card_1,
 .overview_card_2,
 .overview_card_3,
-.overview_card_4{
+.overview_card_4,
+.overview_card_5,
+.overview_card_6{
   background: whitesmoke;
 
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -187,12 +189,29 @@ background: #000000b8;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(128,131,131,0.6096813725490196) 100%);
     border-radius: 5px;
-    padding: 0 1em;
-    border-left: 5px solid white;
-    border-top: 5px solid whitesmoke;
+    padding:  1em;
+    border: 2px solid whitesmoke;
     margin-bottom: 1em;
     background: #000000b8;
 }
+
+.performance_comment {
+
+  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+}
+
+
+.performance_comment h5{
+
+  text-align: right;
+  font-size: .85em;
+}
+
+
 
 .overview_cards{
  display: flex;
@@ -200,6 +219,8 @@ background: #000000b8;
  padding-top:1em;
  gap: 3em;
  justify-content: center;
+ overflow-y: scroll;
+    height: 720px;
 }
 
 
@@ -230,8 +251,10 @@ background: #000000b8;
 .overview_card_1,
 .overview_card_2,
 .overview_card_3,
-.overview_card_4{
-    height: 620px !important;
+.overview_card_4,
+.overview_card_5,
+.overview_card_6{
+    /*height: 620px !important;*/
 
     border: 4px #00000045 double;
     border-radius: 5px;
@@ -249,7 +272,9 @@ hr {
 .overview_card_1 h5,
 .overview_card_2 h5,
 .overview_card_3 h5,
-.overview_card_4 h5{
+.overview_card_4 h5,
+.overview_card_5 h5,
+.overview_card_6 h5{
     background: black;
     width: 100%;
     margin:0px;
@@ -278,6 +303,29 @@ hr {
   font-size: .95em;
 }
 
+/******************************************/
+#right_panels .nav-tabs>li.active>a,
+#right_panels .nav-tabs>li.active>a:focus,
+#right_panels .nav-tabs>li.active>a:hover{
+
+  background-color: ;
+}
+
+.nav-tabs>li>a {
+    color: black;
+    font-weight: 500;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    color: whitesmoke;
+    cursor: default;
+    background-color: lightslategray;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+/******************************************/
 
 .tabbable ul#tabset_main li {
         display: inline-block;

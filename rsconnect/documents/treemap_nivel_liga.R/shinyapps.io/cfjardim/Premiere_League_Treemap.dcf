@@ -5,10 +5,10 @@ account: cfjardim
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8291629
-bundleId: 6849799
+bundleId: 6840493
 url: https://cfjardim.shinyapps.io/Premiere_League_Treemap/
-when: 1676471813.45179
-lastSyncTime: 1676471813.45181
+when: 1676293181.25003
+lastSyncTime: 1676293181.25004
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .gitattributes|README.html|README.md
+ignoredFiles: .gitattributes|lixo.R|lixo_2.R|README.html|README.md

@@ -6,9 +6,12 @@ function_cards_tabsetpanel <- function(title, card_number,
   div(class = paste0('overview_card_',card_number),
 
       h5(tags$img(class = 'svg_icon', height  ='24px',width  ='24px',
-                  src = paste0('img/icon_',card_number,'.svg')),
+                  src = paste0('img/icon_',
+                               card_number,'.svg'),
+                  style = 'cursor:  help;'),
          title, style = 'display: flex; align-items: center;
-             justify-content: space-between; border-radius: 2px;'),
+             justify-content: space-between; border-radius: 2px;
+         '),
 
       htmlOutput(outputId = first_description_id),
 
