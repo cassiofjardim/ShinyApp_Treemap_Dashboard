@@ -8,18 +8,18 @@ library(shinyjs)
 library(reactable)
 library(reactablefmtr)
 
-source(file = 'www/R/sql_nivel_liga.R')
-source(file = 'www/R/main.R')
+source(file = 'R/main_nivel_liga.R')
 
-source(file = 'www/R/module_left_right_columns.R')
+# source(file = 'www/R/module_left_right_columns.R')
 
-source(file = 'www/R/donwload_table_button.R')
-source(file = 'www/R/cards_chart_function.R')
+source(file = 'www/util/treemap_chart_function.R')
+source(file = 'www/util/spline_chart_function.R')
+source(file = 'www/util/column_chart_function.R')
+source(file = 'www/util/bubble_chart_function.R')
 
-source(file = 'www/R/cards_tabsetpanels_function.R')
-# source(file = 'www/R/cards_functions.R')
+source(file = 'www/util/cards_tabsetpanels_function.R')
 
-source(file = 'www/R/main_function_reactable_treemap_dash.R')
+source(file = 'www/util/reactable_treemap_function.R')
 
 
 ui <- fluidPage(
