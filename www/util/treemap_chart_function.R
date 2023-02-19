@@ -15,17 +15,16 @@ treemap_chart_function <- function(data,click_event, slices_colors){
 
       treemap = list(
 
-        marker = list(
-          symbol = 'url(https://www.highcharts.com/samples/graphics/sun.png)'
-        ),
+        # marker = list(
+        #   symbol = 'url(https://www.highcharts.com/samples/graphics/sun.png)'
+        # ),
 
         dataLabels= list(
           enabled= TRUE,
           align= 'center',
           verticalAlign= 'top',
           style= list(
-            fontSize= '15px',
-            fontWeight= 'bold'
+            fontSize= '12px'
           )
         ),
         events = list(click = click_event))) %>%
@@ -34,7 +33,7 @@ treemap_chart_function <- function(data,click_event, slices_colors){
           hc_tooltip(
             headerFormat = glue::glue('
                             <strong, style = "font-size: 20px;">
-                              Ranking Position:
+                                      {data$Squad_Tooltip[1]}
                             </strong>
                             <br/>
                             <img, src = "img/dashboard.svg">'),

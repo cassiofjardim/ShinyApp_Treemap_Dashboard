@@ -20,7 +20,7 @@
 
 body{
     height: fit-content !important;
-    padding: 2em;
+    /*padding: 2em;*/
     background-color: #8a8f94;
     /*background-color: #e2cca3;*/
     background-image:
@@ -56,22 +56,100 @@ img.svg_icon.clickable {
     top: 4em;
 }
 
+.main_header_div{
+
+  background-image: url(img/bk.jpg);
+    height: 234px;
+    background-position: top;
+    background-size: cover;
+        margin: 1em 0;
+    border-radius: 5px;
+}
+
+
+
 h1.dash_title{
 
-    box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
-    backdrop-filter: blur(0px);
+    box-shadow: 0 4px 30px rgb(0 0 0 / 10%); */
+    /* backdrop-filter: blur(0px); */
     -webkit-backdrop-filter: blur(0px);
-    border: 1px solid rgba(241, 224, 224, 0.67);
-    padding: .75em;
+    /* border: 1px solid rgba(241, 224, 224, 0.67); */
+    padding: 0.75em;
     font-family: 'Exo 2';
-    border-radius: 5px;
+    /* border-radius: 5px; */
     text-align: end;
     color: whitesmoke;
-    background: rgb(2,0,36);
-background: linear-gradient(270deg, rgba(2,0,36,1) 0%, rgba(128,131,131,0.6096813725490196) 100%);
-border-left: 10px solid whitesmoke;
-background: #000000b8;
+    /* background: rgb(2,0,36); */
+    /* background: linear-gradient(270deg, rgba(2,0,36,1) 0%, rgba(128,131,131,0.6096813725490196) 100%); */
+    /* border-left: 10px solid whitesmoke; */
+    /* background: #000000b8; */
+    height: 100%;
 }
+
+
+/************************************************/
+/**************MARQUEE AREA ****************/
+/************************************************/
+.marquee-container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background: black;
+    overflow: hidden;
+    padding: 0.5em 2em;
+    margin-bottom: 0em;
+    border-bottom: 1px solid lightgray;
+}
+
+.marquee {
+    display: flex;
+    padding: 0.25em 0;
+    white-space: nowrap;
+    animation: marquee 41.5s infinite linear;
+    font-weight: 500;
+    margin: 0px;
+    width: 100vw;
+    font-size: 1em;
+    font-family: sans-serif;
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+/* notice the infinite */
+.marquee:after{
+
+}
+
+
+@keyframes marquee{
+    0% {
+        transform: translateX(0)
+    }
+    100% {
+        transform: translateX(-40%)
+    }
+}
+
+
+
+.marquee p{
+  color: black;
+    font-size: 2em !important;
+
+    font-weight: 600;
+}
+
+.marquee span{
+
+  font-weight: 300;
+  font-size: 2.25em;
+  margin: 0 1em !important;
+
+
+}
+
+/********************************************************************************/
 
 
 

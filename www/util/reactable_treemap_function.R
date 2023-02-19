@@ -98,7 +98,7 @@ table_style <-
                                zIndex = 1),
 
             cell = function(value){
-              img_src <- knitr::image_uri(paste0('www/img/2021/',value,'.png'))
+              img_src <- knitr::image_uri(paste0('www/img/2020/',value,'.png'))
               tagList(
                 div(
                   style  ='display: flex;gap:2em;font-weight: 700;',

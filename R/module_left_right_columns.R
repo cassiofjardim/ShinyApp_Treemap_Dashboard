@@ -207,7 +207,7 @@ left_right_columns_Server <- function(id) {
                  ns <- NS(id)
 
                  league_table <- reactive({
-                   league_table_df
+                   league_table_df %>% mutate(Squad_Tooltip = paste0(Squad,' - ',Rk))
                  })
 
                  standard_table <- reactive({
@@ -285,7 +285,7 @@ left_right_columns_Server <- function(id) {
                        h1(rv$country, style = 'font-weight: 900; font-size: 3em;'),
                        tags$img(
                          class = 'top_card_icon',
-                         src = paste0('img/2021/', rv$country, '.png')
+                         src = paste0('img/2020/', rv$country, '.png')
                        )
                      )
                    )
@@ -308,7 +308,7 @@ left_right_columns_Server <- function(id) {
                  output$performance_description <- renderUI({
                    div(class = 'performance_comment',
 
-                       tags$img(src = 'img/2021/Premiere_League_logo.png',
+                       tags$img(src = 'img/2020/Premiere_League_logo.png',
                                 width = '34px', height = '34px',
                                 style = 'border-radius: 50%;'),
 

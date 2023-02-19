@@ -16,6 +16,7 @@ source(file = 'www/util/treemap_chart_function.R')
 source(file = 'www/util/spline_chart_function.R')
 source(file = 'www/util/column_chart_function.R')
 source(file = 'www/util/bubble_chart_function.R')
+source(file = 'www/util/marquee_week_games.R')
 
 source(file = 'www/util/cards_tabsetpanels_function.R')
 
@@ -31,11 +32,15 @@ ui <- fluidPage(
   title = 'TREEMAP - Premiere League',
 
   div(
-    class = 'select_input_div',
+    class = 'main_header_div',
 
     h1(tags$img(class = "svg_icon",src = 'img/dashboard.svg'),
        class = 'dash_title',
        'TREEMAP - Nível Liga')
+  ),
+  div(class = "marquee-container",
+      div(class = "marquee",
+          marquee_df,marquee_df)
   ),
 # - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - - -- - - - -
     div(class  ='treemap_left_right',
