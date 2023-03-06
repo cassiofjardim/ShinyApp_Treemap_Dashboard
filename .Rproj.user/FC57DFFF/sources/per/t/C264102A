@@ -1,0 +1,26 @@
+{
+    "id": "C264102A",
+    "path": "C:/Users/Cassio_1/OneDrive/Github_Projects/ShinyApp_Treemap_Dashboard/R/module/module_treemap.R",
+    "project_path": "R/module/module_treemap.R",
+    "type": "r_source",
+    "hash": "3598084911",
+    "contents": "",
+    "dirty": false,
+    "created": 1678103871060.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "1,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1678103224,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1678103224,
+    "read_only": false,
+    "read_only_alternatives": []
+}
