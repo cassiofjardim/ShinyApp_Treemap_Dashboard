@@ -1,7 +1,5 @@
+
 source('R/metrics_to_choose.R')
-
-main_league_df <- main_league_df %>% mutate(Cores = colors)
-
 
 csvDownloadButton <- function(id, filename = "data.csv", label = "Download as CSV") {
   tags$button(
@@ -80,44 +78,13 @@ left_right_columns_UI <- function(id) {
               #********************************************************************************
 
               function_cards_tabsetpanel(
-            title = 'Number of Goals - Expected Goals: Goals - xG',
-            first_description_id = ns('xg_first_description'),
-            card_number = 1,
-            panel_title_1 = 'xG',
-            panel_title_2 = 'xGA',
-            panel_title_3 = 'xGD',
-            panel_title_4 = 'G_xG',
-            chart_id_1 = ns('xg_chart_1'),
-            chart_id_2 = ns('xg_chart_2'),
-            chart_id_3 = ns('xg_chart_3'),
-            chart_id_4 = ns('xg_chart_4'),
-            footer_description_id = ns('xg_footer_description')
-          ),
-
-          function_cards_tabsetpanel(
-            title = 'Home and Away Metrics - Externals',
-            first_description_id = ns('home_away_first_description'),
-            card_number = 2,
-            panel_title_1 = 'xG Home',
-            panel_title_2 = 'xG Away',
-            panel_title_3 = 'G_xG Home',
-            panel_title_4 = 'G_xG Away',
-            chart_id_1 = ns('home_away_chart_1'),
-            chart_id_2 = ns('home_away_chart_2'),
-            chart_id_3 = ns('home_away_chart_3'),
-            chart_id_4 = ns('home_away_chart_4'),
-            footer_description_id = ns('home_away_footer_description')
-          ),
-
-
-          function_cards_tabsetpanel(
             title = 'Standard Metrics',
             first_description_id = ns('standard_first_description'),
-            card_number = 3,
-            panel_title_1 = 'Goals',
-            panel_title_2 = 'Assistances',
-            panel_title_3 = 'Goals + Assistances',
-            panel_title_4 = 'XG + xAG per Min.',
+            card_number = 1,
+            panel_title_1 = standard_metrics[1],
+            panel_title_2 = standard_metrics[2],
+            panel_title_3 = standard_metrics[3],
+            panel_title_4 = standard_metrics[4],
             chart_id_1 = ns('standard_chart_1'),
             chart_id_2 = ns('standard_chart_2'),
             chart_id_3 = ns('standard_chart_3'),
@@ -126,62 +93,54 @@ left_right_columns_UI <- function(id) {
           ),
 
           function_cards_tabsetpanel(
-            title = 'Progressions - Passing and Carries',
-            first_description_id = ns('progression_first_description'),
+            title = 'Passing Metrics',
+            first_description_id = ns('passing_first_description'),
+            card_number = 2,
+            panel_title_1 = passing_metrics[1],
+            panel_title_2 = passing_metrics[2],
+            panel_title_3 = passing_metrics[3],
+            panel_title_4 = passing_metrics[4],
+            chart_id_1 = ns('passing_chart_1'),
+            chart_id_2 = ns('passing_chart_2'),
+            chart_id_3 = ns('passing_chart_3'),
+            chart_id_4 = ns('passing_chart_4'),
+            footer_description_id = ns('passing_footer_description')
+          ),
+
+
+          function_cards_tabsetpanel(
+            title = 'Possession Metrics',
+            first_description_id = ns('possession_first_description'),
+            card_number = 3,
+            panel_title_1 = possession_metrics[1],
+            panel_title_2 = possession_metrics[2],
+            panel_title_3 = possession_metrics[3],
+            panel_title_4 = possession_metrics[4],
+            chart_id_1 = ns('possession_chart_1'),
+            chart_id_2 = ns('possession_chart_2'),
+            chart_id_3 = ns('possession_chart_3'),
+            chart_id_4 = ns('possession_chart_4'),
+            footer_description_id = ns('possession_footer_description')
+          ),
+
+          function_cards_tabsetpanel(
+            title = 'Miscelanious Metrics',
+            first_description_id = ns('misc_first_description'),
             card_number = 4,
-            panel_title_1 = 'Passing Progression',
-            panel_title_2 = 'Carries Progression',
-            panel_title_3 = ' -- ',
-            panel_title_4 = ' --',
-            chart_id_1 = ns('progression_chart_1'),
-            chart_id_2 = ns('progression_chart_2'),
-            chart_id_3 = ns('progression_chart_3'),
-            chart_id_4 = ns('progression_chart_4'),
-            footer_description_id = ns('progression_footer_description')
-          ),
-
-          function_cards_tabsetpanel(
-            title = 'Metrics 5- Type of Metrics',
-            first_description_id = ns('five_first_description'),
-            card_number = 5,
-            panel_title_1 = 'Metrics 5 - M1',
-            panel_title_2 = 'Metrics 5 - M2',
-            panel_title_3 = 'Metrics 5 - M3',
-            panel_title_4 = 'Metrics 5 - M4',
-            chart_id_1 = ns('chart_5_chart_1'),
-            chart_id_2 = ns('chart_5_chart_2'),
-            chart_id_3 = ns('chart_5_chart_3'),
-            chart_id_4 = ns('chart_5_chart_4'),
-            footer_description_id = ns('five_footer_description')
-          ),
-
-          function_cards_tabsetpanel(
-            title = 'Metrics 6 - Type of Metrics',
-            first_description_id = ns('six_first_description'),
-            card_number = 6,
-            panel_title_1 = 'Metrics 6 - M1',
-            panel_title_2 = 'Metrics 6 - M2',
-            panel_title_3 = 'Metrics 6 - M3',
-            panel_title_4 = 'Metrics 6 - M4',
-            chart_id_1 = ns('chart_6_chart_1'),
-            chart_id_2 = ns('chart_6_chart_2'),
-            chart_id_3 = ns('chart_6_chart_3'),
-            chart_id_4 = ns('chart_6_chart_4'),
-            footer_description_id = ns('six_footer_description')
+            panel_title_1 = misc_metrics[1],
+            panel_title_2 = misc_metrics[2],
+            panel_title_3 = misc_metrics[3],
+            panel_title_4 = misc_metrics[4],
+            chart_id_1 = ns('misc_chart_1'),
+            chart_id_2 = ns('misc_chart_2'),
+            chart_id_3 = ns('misc_chart_3'),
+            chart_id_4 = ns('misc_chart_4'),
+            footer_description_id = ns('misc_footer_description')
           )
-          #********************************************************************************
-
-
-
         )
       ))
     )
   )
-
-
-
-
-
 
 }
 
@@ -263,10 +222,5 @@ left_right_columns_Server <- function(id) {
                    renderHighchart({
 
                    })
-
-
-
-
-
                })
 }

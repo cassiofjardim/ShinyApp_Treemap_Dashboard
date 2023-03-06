@@ -2,12 +2,12 @@ treemap_chart_function <- function(data,click_event, slices_colors){
 
   data %>%
 
-    hchart(type = "treemap",
+  hchart(type = "treemap",
 
-           layoutStartingDirection = 'left',
-           colorByPoint = TRUE,
+         layoutStartingDirection = 'left',
+         colorByPoint = TRUE,
 
-           inverted = TRUE) %>%
+         inverted = TRUE) %>%
 
     hc_colors(colors = slices_colors)  %>%
 
@@ -30,14 +30,14 @@ treemap_chart_function <- function(data,click_event, slices_colors){
         events = list(click = click_event))) %>%
 
 
-    hc_tooltip(
-      headerFormat = glue::glue('
+          hc_tooltip(
+            headerFormat = glue::glue('
                             <strong, style = "font-size: 20px;">
                                       {data$Squad_Tooltip[1]}
                             </strong>
                             <br/>
                             <img, src = "img/dashboard.svg">'),
-      pointFormat = paste0(" {point.y:,.0f}"))
+            pointFormat = paste0(" {point.y:,.0f}"))
 
 }
 

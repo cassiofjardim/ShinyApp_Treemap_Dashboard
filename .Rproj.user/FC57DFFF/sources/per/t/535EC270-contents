@@ -8,7 +8,9 @@ library(shinyjs)
 library(reactable)
 library(reactablefmtr)
 
-source(file = 'R/module/module_treemap.R')
+library(scales)
+
+source(file = 'R/modules/module_treemap.R')
 source(file = 'R/util/treemap_chart_function.R')
 source(file = 'R/util/cards_tabsetpanels_function.R')
 
